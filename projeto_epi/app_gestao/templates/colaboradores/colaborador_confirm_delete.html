@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<h2>⚠️ Confirmar Exclusão de Colaborador</h2>
+
+<p>Você tem certeza que deseja excluir permanentemente o colaborador **{{ colaborador.nome }}** (Matrícula: **{{
+    colaborador.matricula }}**)?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" style="background-color: red; color: white; padding: 10px;">
+        Sim, Tenho Certeza
+    </button>
+    <a href="{% url 'colaborador_list' %}">Não, Cancelar</a>
+</form>
+{% endblock content %}

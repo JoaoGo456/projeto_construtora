@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    {% endblock content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if form.instance.pk %}Editar Empréstimo{% else %}Registrar Empréstimo{% endif %}</title>
+</head>
+<body>
+    <h2>
+        {% if form.instance.pk %}📝 Editar Empréstimo{% else %}➕ Registrar Novo Empréstimo{% endif %}
+    </h2>
+    <a href="{% url 'emprestimo_list' %}">Voltar para a lista</a>
+    <hr>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }} 
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

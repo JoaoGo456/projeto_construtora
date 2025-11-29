@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+{% block content %}
+   
+
+    <h2>📋 Gestão de Colaboradores</h2>
+    
+    <a href="{% url 'colaborador_create' %}">➕ Cadastrar Novo Colaborador</a>
+    
+    <hr>
+    
+    {% if colaboradores %}
+        <table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Matrícula</th>
+                    <th>Cargo</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for colaborador in colaboradores %}
+                <tr>
+                    <td>{{ colaborador.nome }}</td>
+                    <td>{{ colaborador.matricula }}</td>
+                    <td>{{ colaborador.cargo }}</td>
+                    <td>
+                        {% if colaborador.ativo %}
+                            <span style="color: green;">Ativo</span>
+                        {% else %}
+                            <span style="color: red;">Inativo</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'colaborador_update' colaborador.pk %}">Editar</a> |
+                        <a href="{% url 'colaborador_delete' colaborador.pk %}">Excluir</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Nenhum colaborador foi encontrado. Clique em "Cadastrar Novo Colaborador" para começar.</p>
+    {% endif %}
+    {% endblock content %}

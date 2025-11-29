@@ -1,0 +1,26 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Gestão de EPI{% endblock %}</title> 
+    
+    <link rel="stylesheet" href="{% static 'app_gestao/css/style.css' %}">
+</head>
+<body>
+    <header id="header">
+        <h1>Sistema de Gestão de EPI</h1>
+        <nav id="menu">
+            <a href="{% url 'colaborador_list' %}">Colaboradores</a>
+            <a href="{% url 'epi_list' %}">EPIs</a>
+            <a href="{% url 'emprestimo_list' %}">Empréstimos</a>
+            </nav>
+    </header>
+    
+    <main id="content">
+        {% block content %}
+        {% endblock content %}
+    </main>
+</body>
+</html>

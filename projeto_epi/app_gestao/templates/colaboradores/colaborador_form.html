@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<h2>
+    {% if form.instance.pk %}📝 Editar Colaborador{% else %}➕ Cadastrar Colaborador{% endif %}
+</h2>
+
+<form method="post">
+    {% csrf_token %} {{ form.as_p }}
+
+    <button type="submit">
+        {% if form.instance.pk %}Salvar Alterações{% else %}Salvar Cadastro{% endif %}
+    </button>
+    <a href="{% url 'colaborador_list' %}">Cancelar e Voltar</a>
+</form>
+{% endblock content %}
