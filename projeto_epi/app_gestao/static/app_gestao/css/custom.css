@@ -1,0 +1,39 @@
+/* custom.css */
+
+/* Define uma cor de destaque diferente para o seu sistema */
+:root {
+    --primary-color: #28a745; /* Um verde vibrante, por exemplo */
+    --primary-hover: #218838;
+}
+
+/* Aplica a nova cor aos botões primários */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover) !important;
+    border-color: var(--primary-hover) !important;
+}
+
+/* Adiciona um efeito sutil de sombra e transição aos campos de formulário */
+.form-control, .form-select {
+    border-radius: 0.25rem; /* Mantém o padrão, mas adiciona transição */
+    transition: all 0.3s ease-in-out;
+}
+
+.form-control:focus, .form-select:focus {
+    /* Adiciona uma sombra suave ao focar */
+    box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25); /* Sombra baseada na cor primária */
+    border-color: var(--primary-color);
+}
+
+/* Estilo para os badges de status para melhor contraste */
+.badge {
+    padding: 0.5em 0.7em;
+    font-size: 0.85em;
+    border-radius: 0.25rem;
+}
+
+
