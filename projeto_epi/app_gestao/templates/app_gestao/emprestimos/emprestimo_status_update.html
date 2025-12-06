@@ -1,0 +1,62 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2>Atualizar Status do Empréstimo #{{ emprestimo.pk }}</h2>
+    <p>Apenas o Status e a Data Real de Devolução podem ser alterados.</p>
+    
+    <div class="card p-4">
+        <form method="POST" action="{% url 'atualizar_status_emprestimo' pk=emprestimo.pk %}">
+            {% csrf_token %}
+            
+            <div class="row">
+                <div class="col-md-6 border-end">
+                    <h4>Dados do Empréstimo (Não Editáveis)</h4>
+                    
+                    <div class="mb-3">
+                        {{ form.colaborador_nome.label_tag }}
+                        {{ form.colaborador_nome }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.epi_nome.label_tag }}
+                        {{ form.epi_nome }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.data_emprestimo_display.label_tag }}
+                        {{ form.data_emprestimo_display }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.data_devolucao_prevista_display.label_tag }}
+                        {{ form.data_devolucao_prevista_display }}
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h4>Campos para Atualização</h4>
+                    
+                    <div class="mb-3">
+                        {{ form.status.label_tag }}
+                        {{ form.status }}
+                        </div>
+
+                    <div class="mb-3">
+                        {{ form.data_devolucao_real.label_tag }}
+                        {{ form.data_devolucao_real }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.observacao_devolucao.label_tag }}
+                        {{ form.observacao_devolucao }}
+                    </div>
+                </div>
+            </div>
+            
+            <hr>
+            <button type="submit" class="btn btn-success me-2">Salvar Status</button>
+            <a href="{% url 'emprestimo_relatorio' %}" class="btn btn-secondary">Cancelar</a>
+            
+        </form>
+    </div>
+</div>
+{% endblock content %}

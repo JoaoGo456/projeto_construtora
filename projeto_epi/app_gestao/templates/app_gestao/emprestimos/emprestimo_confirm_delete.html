@@ -1,0 +1,18 @@
+{% extends 'app_gestao/base/base.html' %}
+{% block content %}
+
+
+<title>Confirmar Exclusão de Empréstimo</title>
+
+
+<body>
+    <h2>🗑️ Confirmar Exclusão de Empréstimo</h2>
+    <p>Você tem certeza que deseja excluir o registro de empréstimo de **{{ emprestimo.epi.nome }}** para o colaborador
+        **{{ emprestimo.colaborador.nome }}**?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sim, Excluir</button>
+        <a href="{% url 'emprestimo_list' %}">Cancelar</a>
+    </form>
+{% endblock content %}

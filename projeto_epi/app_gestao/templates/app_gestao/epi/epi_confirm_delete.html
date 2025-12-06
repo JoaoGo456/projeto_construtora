@@ -1,0 +1,16 @@
+{% extends 'app_gestao/base/base.html' %}
+{% block content %}
+
+
+<title>Confirmar Exclusão de EPI</title>
+
+
+<h2>🗑️ Confirmar Exclusão de EPI</h2>
+<p>Você tem certeza que deseja excluir o EPI **{{ epi.nome }}** (CA: **{{ epi.ca }}**)?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim, Excluir</button>
+    <a href="{% url 'epi_list' %}">Cancelar</a>
+</form>
+{% endblock content %}

@@ -1,53 +1,43 @@
 # app_gestao/urls.py
 
 from django.urls import path
-from .views import (
-    ColaboradorListView,
-    ColaboradorCreateView,
-    ColaboradorUpdateView,
-    ColaboradorDeleteView,
-    # As importações de views devem ser mantidas juntas
-    EPIListView,
-    EPICreateView,
-    EPIUpdateView,
-    EPIDeleteView,
-    EmprestimoListView,
-    EmprestimoCreateView,
-    EmprestimoUpdateView,
-    EmprestimoDeleteView
-)
+# 🚨 CORREÇÃO AQUI: Importar o módulo de views inteiro.
+from . import views 
+# Isso permite acessar todas as funções e classes como views.NomeDaView
+
 
 urlpatterns = [
     # ------------------
     # URLs para COLABORADORES
     # ------------------
-    # URL completa: /colaboradores/
-    path('', ColaboradorListView.as_view(), name='colaborador_list'), # <-- Vírgula OK
-    
-    # URL completa: /colaboradores/novo/
-    path('novo/', ColaboradorCreateView.as_view(), name='colaborador_create'), # <-- Vírgula OK
-    
-    # URL completa: /colaboradores/editar/1/
-    path('editar/<int:pk>/', ColaboradorUpdateView.as_view(), name='colaborador_update'), # <-- Vírgula OK
-    
-    # URL completa: /colaboradores/excluir/1/
-    path('excluir/<int:pk>/', ColaboradorDeleteView.as_view(), name='colaborador_delete'), # <-- Vírgula ESSENCIAL
+    # Mudança de: ColaboradorListView.as_view() para views.ColaboradorListView.as_view()
+    path('', views.ColaboradorListView.as_view(), name='colaborador_list'), 
+    path('novo/', views.ColaboradorCreateView.as_view(), name='colaborador_create'), 
+    path('editar/<int:pk>/', views.ColaboradorUpdateView.as_view(), name='colaborador_update'), 
+    path('excluir/<int:pk>/', views.ColaboradorDeleteView.as_view(), name='colaborador_delete'), 
     
     # ------------------
     # URLs para EPIs
     # ------------------
-    # URL completa: /colaboradores/epis/
-    path('epis/', EPIListView.as_view(), name='epi_list'), # <-- Vírgula ESSENCIAL
-    path('epis/novo/', EPICreateView.as_view(), name='epi_create'), # <-- Vírgula OK
-    path('epis/editar/<int:pk>/', EPIUpdateView.as_view(), name='epi_update'), # <-- Vírgula OK
-    path('epis/excluir/<int:pk>/', EPIDeleteView.as_view(), name='epi_delete'), # <-- Vírgula ESSENCIAL
-
+    path('epis/', views.EPIListView.as_view(), name='epi_list'), 
+    path('epis/novo/', views.EPICreateView.as_view(), name='epi_create'), 
+    path('epis/editar/<int:pk>/', views.EPIUpdateView.as_view(), name='epi_update'), 
+    path('epis/excluir/<int:pk>/', views.EPIDeleteView.as_view(), name='epi_delete'), 
+    
+    # ------------------
+    # URLs de RELATÓRIOS (Novas FBVs)
+    # ------------------
+    # Acesso direto à função: views.relatorio_emprestimos
+    path('emprestimos/relatorio/', views.relatorio_emprestimos, name='emprestimo_relatorio'),
+    
+    # Acesso direto à função: views.atualizar_status_emprestimo
+    path('emprestimos/atualizar_status/<int:pk>/', views.atualizar_status_emprestimo, name='atualizar_status_emprestimo'),
+    
     # ------------------
     # URLs para EMPRÉSTIMOS
     # ------------------
-    # URL completa: /colaboradores/emprestimos/
-    path('emprestimos/', EmprestimoListView.as_view(), name='emprestimo_list'), # <-- Vírgula ESSENCIAL
-    path('emprestimos/novo/', EmprestimoCreateView.as_view(), name='emprestimo_create'), # <-- Vírgula OK
-    path('emprestimos/editar/<int:pk>/', EmprestimoUpdateView.as_view(), name='emprestimo_update'), # <-- Vírgula OK
-    path('emprestimos/excluir/<int:pk>/', EmprestimoDeleteView.as_view(), name='emprestimo_delete'), # <-- Última linha sem vírgula, pois é o último item.
+    path('emprestimos/', views.EmprestimoListView.as_view(), name='emprestimo_list'), 
+    path('emprestimos/novo/', views.EmprestimoCreateView.as_view(), name='emprestimo_create'), 
+    path('emprestimos/editar/<int:pk>/', views.EmprestimoUpdateView.as_view(), name='emprestimo_update'), 
+    path('emprestimos/excluir/<int:pk>/', views.EmprestimoDeleteView.as_view(), name='emprestimo_delete'),
 ]

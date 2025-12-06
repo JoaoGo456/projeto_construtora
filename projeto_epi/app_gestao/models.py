@@ -77,6 +77,24 @@ class Emprestimo(models.Model):
         verbose_name="Data de Devolução Real"
     )
 
+    STATUS_CHOICES = (
+        ('emprestado', 'Emprestado'),
+        ('devolvido', 'Devolvido'),
+        ('atrasado', 'Atrasado'),
+    )
+
+    status = models.CharField(
+        max_length=20, 
+        choices=STATUS_CHOICES, 
+        default='emprestado', 
+        verbose_name="Status"
+    )
+    observacao_devolucao = models.TextField(
+        blank=True, 
+        null=True, 
+        verbose_name="Observação da Devolução"
+    )
+
     @property
     def devolvido(self):
         """Propriedade para verificar se o EPI foi devolvido."""
